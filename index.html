@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="quiz_app">
+    <div id="card">
+      <div class="head">
+        <div class="head_left">
+          <p class="question_attempt"></p>
+        </div>
+        <!--
+        <div class="head_right">
+          <p>8s</p>
+        </div>
+        -->
+      </div>
+      <div class="card_question">
+        <h1 class="quiz_title"></h1>
+      </div>
+      <div class="card_options">
+        <button class="option1 option"></button>
+        <button class="option2 option"></button>
+        <button class="option3 option"></button>
+        <button class="option4 option"></button>
+      </div>
+      <div class="card_button">
+        <button class="prevBtn">Previous</button>
+        <button class="nextBtn">Next</button>
+      </div>
+    </div>
+    <div id="result">
+      <div class="result_title">
+        <h1>Result</h1>
+      </div>
+      <div class="my_score">
+        <p class="your_score"></p>
+        <p>Score</p>
+      </div>
+      <div class="first">
+        <div class="total_score">
+          <p class="total_score_numeric"></p>
+          <p>Total Score</p>
+        </div>
+        <div class="attempt_score">
+          <p class="attempt_score_numeric"></p>
+          <p>Attemped</p>
+        </div>
+        <div class="unattempt_score">
+          <p class="unattempt_score_numeric">0</p>
+          <p>Unattempt</p>
+        </div>
+        <div class="wrong_score">
+          <p class="wrong_score_numeric">3</p>
+          <p>Wrong</p>
+        </div>
+      </div>
+      <div class="replay_quiz_btn">
+        <button class="replayElement">Replay Quiz</button>
+      </div>
+    </div>
+  </div>
+  <script src="./main.js"></script>
+</body>
+
+</html>
