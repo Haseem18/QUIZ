@@ -199,6 +199,7 @@ resultElement.addEventListener("click", () => {
 
 const replayElement = document.querySelector('.replayElement')
 replayElement.addEventListener("click", () => {
+  currentQuiz = 0;
   correctAnswer = 0;
   wrongAnswer = 0;
   attemptAnswer = 0;
