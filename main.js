@@ -99,6 +99,7 @@ const resultElement = document.createElement('button');
 const btnElement = document.querySelector('.card_button');
 const cardElement = document.querySelector('#card');
 const orginalResultElement = document.querySelector('#result');
+const timerSecondsElement = document.querySelector('.timer_seconds')
 
 let currentQuiz = 0;
 let count = 0; 
@@ -108,54 +109,62 @@ let attemptAnswer = 0;
 let myScore = 0;
 let unattemptScore = 0;
 
+
 function updateQuiz() {
   if (currentQuiz >= quizzes.length) {
     currentQuiz = quizzes.length - 1;
     alert('This is your last Quiz');
     return;
   }
-  
+
   if (currentQuiz < 0) {
     currentQuiz = 0;
     alert('This is your first Quiz');
     return;
   }
   
-  if (currentQuiz === 9) {
-      resultElement.className = "resultBtn";
-      resultElement.innerHTML = "Result";
-      btnElement.insertBefore(resultElement, btnElement.children[1]);
-  }
-  
+  if (currentQuiz === quizzes.length - 1) {
+    resultElement.className = "option";
+    resultElement.innerHTML = "Result";
+    btnElement.insertBefore(resultElement, btnElement.children[1]);
+}
+
   const selectedQuiz = quizzes[currentQuiz];
   paraElement.innerHTML = `${currentQuiz + 1} of ${quizzes.length} Question`;
   headElement.innerHTML = selectedQuiz.question;
-  
+
   selectedQuiz.options.forEach((val, index) => {
-    const optionElement = document.querySelector(`.option${index+1}`);
+    const optionElement = document.querySelector(`.option${index + 1}`);
     optionElement.innerHTML = val.text;
     optionElement.style.backgroundColor = "white";
     optionElement.style.color = "#333";
     optionElement.disabled = false;
-    optionElement.addEventListener("click", () => {
-      if (count > 0) {
-        return;
-      }
-      if (val.correct) {
-        optionElement.style.backgroundColor = "green";
-        optionElement.style.color = "#333";
-        correctAnswer++;
-        attemptAnswer++;
-      } else {
-        optionElement.style.backgroundColor = "red";
-        optionElement.style.color = "#333";
-        wrongAnswer++;
-        attemptAnswer++;
-      }
-      count++;
-      myScore = attemptAnswer - wrongAnswer;
-    });
+
+    optionElement.removeEventListener('click', handleAnswerClick);
+    optionElement.addEventListener("click", handleAnswerClick);
   });
+}
+
+function handleAnswerClick(event) {
+  if (count > 0) return;
+
+  const optionElement = event.target;
+  const currentQuizData = quizzes[currentQuiz];
+  const selectedOption = currentQuizData.options.find(option => option.text === optionElement.innerHTML);
+
+  if (selectedOption.correct) {
+    optionElement.style.backgroundColor = "green";
+    optionElement.style.color = "#333";
+    correctAnswer++;
+  } else {
+    optionElement.style.backgroundColor = "red";
+    optionElement.style.color = "#333";
+    wrongAnswer++;
+  }
+  
+  attemptAnswer++;
+  count++;
+  myScore = attemptAnswer - wrongAnswer;
 }
 
 updateQuiz();
@@ -166,11 +175,12 @@ nextElement.addEventListener("click", () => {
   updateQuiz();
 });
 
-prevElement.addEventListener("click", () => {
+prevElement.addEventListener("click", (event) => {
   currentQuiz--;
   count = 0;
   updateQuiz();
 });
+
 
 resultElement.addEventListener("click", () => {
   cardElement.style.display = "none";
@@ -197,4 +207,4 @@ replayElement.addEventListener("click", () => {
   orginalResultElement.style.display = "none";
   cardElement.style.display = "block";
   updateQuiz()
-})
+});
