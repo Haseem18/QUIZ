@@ -199,7 +199,6 @@ resultElement.addEventListener("click", () => {
 
 const replayElement = document.querySelector('.replayElement')
 replayElement.addEventListener("click", () => {
-  currentQuiz = 0;
   correctAnswer = 0;
   wrongAnswer = 0;
   attemptAnswer = 0;
@@ -207,5 +206,6 @@ replayElement.addEventListener("click", () => {
   unattemptScore = 0;
   orginalResultElement.style.display = "none";
   cardElement.style.display = "block";
-  updateQuiz()
+  currentQuiz = 0;
+  updateQuiz();
 });
